@@ -19,13 +19,43 @@ class MainActivity : ComponentActivity() {
         setContent {
             App_Catalogo_ProdutoTheme {
                 Surface(color = MaterialTheme.colorScheme.background) {
+                    // Criando dados falsos COM IMAGENS para testar
                     val listaFalsa = listOf(
-                        Product(1, "Notebook Gamer", 4500.0, null, "Eletrônicos"),
-                        Product(2, "Mouse Sem Fio", 120.0, null, "Periféricos"),
-                        Product(3, "Cadeira de Escritório", 800.0, null, "Móveis"),
-                        Product(4, "Teclado Mecânico", 250.0, null, "Periféricos"),
-                        Product(5, "Monitor 24pol", 900.0, null, "Eletrônicos"),
-                        Product(6, "Smartphone Top", 3200.0, null, "Celulares")
+                        Product(
+                            id = 1,
+                            name = "Notebook Gamer",
+                            price = 4500.0,
+                            image = "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=500&auto=format&fit=crop&q=60",
+                            category = "Eletrônicos"
+                        ),
+                        Product(
+                            id = 2,
+                            name = "Mouse Sem Fio",
+                            price = 120.0,
+                            image = "https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=500&auto=format&fit=crop&q=60",
+                            category = "Periféricos"
+                        ),
+                        Product(
+                            id = 3,
+                            name = "Cadeira de Escritório",
+                            price = 800.0,
+                            image = "https://images.unsplash.com/photo-1592078615290-033ee584e267?w=500&auto=format&fit=crop&q=60",
+                            category = "Móveis"
+                        ),
+                        Product(
+                            id = 4,
+                            name = "Teclado Mecânico",
+                            price = 250.0,
+                            image = "https://images.unsplash.com/photo-1587829741301-dc798b91a603?w=500&auto=format&fit=crop&q=60",
+                            category = "Periféricos"
+                        ),
+                        Product(
+                            id = 5,
+                            name = "Headset",
+                            price = 900.0,
+                            image = null, // Esse aqui vai ficar sem imagem de propósito para testar
+                            category = "Eletrônicos"
+                        )
                     )
                     ProductListScreen(
                         uiState = ProductUiState.Success(listaFalsa),
