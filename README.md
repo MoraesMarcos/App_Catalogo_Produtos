@@ -85,7 +85,7 @@ Com separação entre:
 
 1. Clone o repositório:
 
-> git clone https://github.com/SEU_USUARIO/App_Catalogo_Produtos.git
+> git clone https://github.com/MoraesMarcos/App_Catalogo_Produtos
 
 2. Abra no Android Studio
 
