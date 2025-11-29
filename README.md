@@ -81,3 +81,22 @@ Com separação entre:
 
 ---
 
+## ▶️ Como Rodar o Projeto
+
+1. Clone o repositório:
+
+git clone https://github.com/SEU_USUARIO/App_Catalogo_Produtos.git
+
+2. Abra no Android Studio
+
+3. Sincronize o Gradle
+
+4. Rode no emulador ou dispositivo físico
+
+---
+
+## 🌐 API Configurada
+
+Base URL utilizada:
+
+https://fakestoreapi.com/
