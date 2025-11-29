@@ -38,7 +38,7 @@ O objetivo é exibir um catálogo de produtos com lista, detalhes, favoritos e f
 - Configurar `AppDatabase`  
 - Implementar parte local do Repository  
 
-### **Marcos — API + Networking (você!)**
+### **Marcos — API + Networking**
 - Configurar Retrofit  
 - Criar DTOs  
 - Criar endpoints e service  
