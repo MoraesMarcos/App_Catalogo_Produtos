@@ -85,7 +85,7 @@ Com separação entre:
 
 1. Clone o repositório:
 
-git clone https://github.com/SEU_USUARIO/App_Catalogo_Produtos.git
+> git clone https://github.com/SEU_USUARIO/App_Catalogo_Produtos.git
 
 2. Abra no Android Studio
 
@@ -99,4 +99,4 @@ git clone https://github.com/SEU_USUARIO/App_Catalogo_Produtos.git
 
 Base URL utilizada:
 
-https://fakestoreapi.com/
+> https://fakestoreapi.com/
