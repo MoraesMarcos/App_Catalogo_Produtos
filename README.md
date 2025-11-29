@@ -26,26 +26,26 @@ O objetivo é exibir um catálogo de produtos com lista, detalhes, favoritos e f
 
 ## 👥 Equipe e Divisão de Tarefas
 
-### **Pessoa 1 — UI/UX + Compose**
+### **Flávio — UI/UX + Compose**
 - Criar telas principais (lista, detalhes, favoritos)  
 - Criar componentes reutilizáveis  
 - Definir tema, cores e tipografia  
 - Garantir responsividade  
 
-### **Pessoa 2 — Banco de Dados (Room)**
+### **Lucas — Banco de Dados (Room)**
 - Criar `ProductEntity`  
 - Criar DAO (CRUD)  
 - Configurar `AppDatabase`  
 - Implementar parte local do Repository  
 
-### **Pessoa 3 — API + Networking (você!)**
+### **Marcos — API + Networking (você!)**
 - Configurar Retrofit  
 - Criar DTOs  
 - Criar endpoints e service  
 - Implementar Repository remoto  
 - Testar API (já funcionando ✅)
 
-### **Pessoa 4 — MVVM + Navegação**
+### **Marcos— MVVM + Navegação**
 - Criar ViewModels e estados com `sealed class`  
 - Criar NavHost e rotas  
 - Integrar Repository com UI  
