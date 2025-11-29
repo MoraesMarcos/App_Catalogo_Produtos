@@ -1,5 +1,5 @@
 # 📱 App Catálogo de Produtos  
-Aplicativo Android desenvolvido por uma equipe de 4 integrantes, utilizando **Jetpack Compose**, **MVVM**, **Retrofit**, **Room**, **Coroutines**, **Navigation Compose** e boas práticas de acessibilidade.  
+Aplicativo Android desenvolvido por uma equipe de 3 integrantes, utilizando **Jetpack Compose**, **MVVM**, **Retrofit**, **Room**, **Coroutines**, **Navigation Compose** e boas práticas de acessibilidade.  
 O app exibe uma lista de produtos, permite navegação entre telas, visualização de detalhes e funcionamento offline com banco local.
 
 ---
