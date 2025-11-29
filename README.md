@@ -5,9 +5,10 @@ O app exibe uma lista de produtos, permite navegação entre telas, visualizaç�
 ---
 
 ## 👥 Integrantes da Equipe
-- Marcos Vinícius – API, Networking, Repository Remoto, MVVM, ViewModels, Navegação e Estados  
+- Marcos Vinícius – API, Networking, Repository Remoto,  
 - Flávio Wallefy – UI/UX, Compose, Tema e Componentes  
 - Lucas Rafael – Room Database e Repository Local
+- Nielson - MVVM, ViewModels, Navegação e Estados
 
 > Todos participaram ativamente do desenvolvimento, com histórico de commits, branches e pull requests revisados.
 
