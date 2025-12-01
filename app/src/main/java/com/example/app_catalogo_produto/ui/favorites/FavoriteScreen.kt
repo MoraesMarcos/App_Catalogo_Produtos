@@ -47,7 +47,6 @@ fun FavoriteScreen(
                     val products = uiState.products
 
                     if (products.isEmpty()) {
-                        // TELA DE LISTA VAZIA (Empty State)
                         Column(
                             modifier = Modifier.fillMaxSize(),
                             horizontalAlignment = Alignment.CenterHorizontally,
@@ -67,12 +66,10 @@ fun FavoriteScreen(
                             )
                         }
                     } else {
-                        // LISTA DE FAVORITOS
                         LazyColumn(
                             contentPadding = PaddingValues(16.dp)
                         ) {
                             items(products) { product ->
-                                // Reutilizando o Card que você já criou!
                                 ProductItemCard(
                                     product = product,
                                     onClick = { onProductClick(product.id) }
