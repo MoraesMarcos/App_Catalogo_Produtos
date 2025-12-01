@@ -1,6 +1,10 @@
 package com.example.app_catalogo_produto.data.repository
 
+import android.content.Context
 import android.util.Log
+import com.example.app_catalogo_produto.data.local.AppDatabase
+import com.example.app_catalogo_produto.data.local.entity.toDomain
+import com.example.app_catalogo_produto.data.local.entity.toEntity
 import com.example.app_catalogo_produto.data.remote.ApiClient
 import com.example.app_catalogo_produto.data.remote.mapper.toDomain
 import com.example.app_catalogo_produto.domain.model.Product
@@ -9,21 +13,45 @@ import com.example.app_catalogo_produto.domain.util.RemoteResult
 import retrofit2.HttpException
 import java.io.IOException
 
-class ProductRepositoryImpl : ProductRepository {
+class ProductRepositoryImpl(context: Context) : ProductRepository {
+
+    private val api = ApiClient.productApi
+    private val dao = AppDatabase.getInstance(context).productDao()
 
     override suspend fun getProducts(): RemoteResult<List<Product>> {
         return try {
-            val dtoList = ApiClient.productApi.getProducts()
+
+            val dtoList = api.getProducts()
             val products = dtoList.map { it.toDomain() }
+
+
+            try {
+                dao.clearAll()
+                dao.insertAll(products.map { it.toEntity() })
+            } catch (e: Exception) {
+                Log.e("Repository", "Erro ao salvar cache", e)
+            }
+
             RemoteResult.Success(products)
+
         } catch (e: Exception) {
-            handleException(e)
+
+            try {
+                val localData = dao.getAll()
+                if (localData.isNotEmpty()) {
+                    RemoteResult.Success(localData.map { it.toDomain() })
+                } else {
+                    handleException(e)
+                }
+            } catch (dbError: Exception) {
+                handleException(e)
+            }
         }
     }
 
     override suspend fun getProductById(id: Int): RemoteResult<Product> {
         return try {
-            val dto = ApiClient.productApi.getProductById(id)
+            val dto = api.getProductById(id)
             RemoteResult.Success(dto.toDomain())
         } catch (e: Exception) {
             handleException(e)
@@ -31,21 +59,11 @@ class ProductRepositoryImpl : ProductRepository {
     }
 
     private fun <T> handleException(e: Exception): RemoteResult<T> {
-        Log.e("ProductRepositoryImpl", "Erro na chamada de API", e)
-
         val message = when (e) {
-            is IOException -> "Falha de conexão. Verifique sua internet."
-            is HttpException -> {
-                val code = e.code()
-                when {
-                    code in 500..599 -> "Erro no servidor. Tente novamente mais tarde."
-                    code == 404 -> "Recurso não encontrado."
-                    else -> "Erro na requisição (código: $code)."
-                }
-            }
-            else -> "Erro inesperado. Tente novamente."
+            is IOException -> "Sem internet. Verificando cache..."
+            is HttpException -> "Erro ${e.code()}"
+            else -> "Erro desconhecido"
         }
-
         return RemoteResult.Error(message, e)
     }
 }

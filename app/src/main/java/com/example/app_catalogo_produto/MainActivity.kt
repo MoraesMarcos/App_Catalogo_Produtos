@@ -14,7 +14,9 @@ import com.example.app_catalogo_produto.ui.theme.App_Catalogo_ProdutoTheme // ou
 
 class MainActivity : ComponentActivity() {
 
-    private val repository = ProductRepositoryImpl()
+    private val repository by lazy {
+        ProductRepositoryImpl(applicationContext)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
