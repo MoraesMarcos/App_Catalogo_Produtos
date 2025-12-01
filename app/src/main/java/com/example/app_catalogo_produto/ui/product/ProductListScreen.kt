@@ -8,36 +8,52 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
 import com.example.app_catalogo_produto.domain.model.Product
 import com.example.app_catalogo_produto.ui.state.ProductUiState
-import androidx.compose.ui.tooling.preview.Preview
-import coil.compose.AsyncImage
 
-
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ProductListScreen(
     uiState: ProductUiState,
     onProductClick: (Int) -> Unit
 ) {
-    when (uiState) {
-        is ProductUiState.Loading -> {
-            Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                CircularProgressIndicator()
-            }
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { Text("Catálogo de Ofertas") },
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = MaterialTheme.colorScheme.primary,
+                    titleContentColor = MaterialTheme.colorScheme.onPrimary
+                )
+            )
         }
-        is ProductUiState.Error -> {
-            Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                Text(text = uiState.message)
-            }
-        }
-        is ProductUiState.Success -> {
-            LazyColumn {
-                items(uiState.products) { product ->
-                    ProductItemCard(
-                        product = product,
-                        onClick = { onProductClick(product.id) }
-                    )
+    ) { paddingValues ->
+        Box(modifier = Modifier.padding(paddingValues)) {
+            when (uiState) {
+                is ProductUiState.Loading -> {
+                    Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                        CircularProgressIndicator()
+                    }
+                }
+                is ProductUiState.Error -> {
+                    Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                        Text(text = uiState.message)
+                    }
+                }
+                is ProductUiState.Success -> {
+                    LazyColumn(
+                        contentPadding = PaddingValues(16.dp)
+                    ) {
+                        items(uiState.products) { product ->
+                            ProductItemCard(
+                                product = product,
+                                onClick = { onProductClick(product.id) }
+                            )
+                        }
+                    }
                 }
             }
         }
@@ -52,9 +68,12 @@ fun ProductItemCard(
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(8.dp)
+            .padding(bottom = 16.dp)
             .clickable { onClick() },
-        elevation = CardDefaults.cardElevation(4.dp)
+        elevation = CardDefaults.cardElevation(4.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.surface
+        )
     ) {
         Column {
             if (product.image != null) {
@@ -64,7 +83,7 @@ fun ProductItemCard(
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(150.dp),
-                    contentScale = androidx.compose.ui.layout.ContentScale.Crop
+                    contentScale = ContentScale.Crop
                 )
             } else {
                 Box(
@@ -77,10 +96,15 @@ fun ProductItemCard(
                     Text("Sem Imagem", style = MaterialTheme.typography.bodySmall)
                 }
             }
+
             Column(Modifier.padding(16.dp)) {
                 Text(text = product.name, style = MaterialTheme.typography.titleMedium)
                 Spacer(Modifier.height(4.dp))
-                Text(text = "R$ ${product.price}", style = MaterialTheme.typography.bodyMedium)
+                Text(
+                    text = "R$ ${product.price}",
+                    style = MaterialTheme.typography.titleMedium,
+                    color = MaterialTheme.colorScheme.secondary
+                )
 
                 product.category?.let {
                     Spacer(Modifier.height(4.dp))
@@ -93,21 +117,4 @@ fun ProductItemCard(
             }
         }
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun ProductListScreenPreview() {
-    // Criando dados falsos só para ver como fica na tela
-    val listaFalsa = listOf(
-        Product(1, "Notebook Gamer", 4500.0, null, "Eletrônicos"),
-        Product(2, "Mouse Sem Fio", 120.0, null, "Periféricos"),
-        Product(3, "Cadeira de Escritório", 800.0, null, "Móveis")
-    )
-
-    // Mostrando a tela com os dados falsos
-    ProductListScreen(
-        uiState = ProductUiState.Success(listaFalsa),
-        onProductClick = {}
-    )
 }
