@@ -12,15 +12,12 @@ import com.example.app_catalogo_produto.ui.state.ProductUiState
 import com.example.app_catalogo_produto.ui.theme.App_Catalogo_ProdutoTheme
 
 class MainActivity : ComponentActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContent {
             App_Catalogo_ProdutoTheme {
                 Surface(color = MaterialTheme.colorScheme.background) {
-                    // Criando dados falsos COM IMAGENS para testar
-                    val listaFalsa = listOf(
+                    val listaParaEntrega = listOf(
                         Product(
                             id = 1,
                             name = "Notebook Gamer",
@@ -37,30 +34,23 @@ class MainActivity : ComponentActivity() {
                         ),
                         Product(
                             id = 3,
-                            name = "Cadeira de Escritório",
+                            name = "Cadeira Ergonômica",
                             price = 800.0,
                             image = "https://images.unsplash.com/photo-1592078615290-033ee584e267?w=500&auto=format&fit=crop&q=60",
                             category = "Móveis"
                         ),
                         Product(
                             id = 4,
-                            name = "Teclado Mecânico",
-                            price = 250.0,
-                            image = "https://images.unsplash.com/photo-1587829741301-dc798b91a603?w=500&auto=format&fit=crop&q=60",
-                            category = "Periféricos"
-                        ),
-                        Product(
-                            id = 5,
-                            name = "Headset",
-                            price = 900.0,
-                            image = null, // Esse aqui vai ficar sem imagem de propósito para testar
-                            category = "Eletrônicos"
+                            name = "Smartphone Pro",
+                            price = 3200.0,
+                            image = null,
+                            category = "Celulares"
                         )
                     )
                     ProductListScreen(
-                        uiState = ProductUiState.Success(listaFalsa),
-                        onProductClick = { idProduto ->
-                            Toast.makeText(this, "Você clicou no ID: $idProduto", Toast.LENGTH_SHORT).show()
+                        uiState = ProductUiState.Success(listaParaEntrega),
+                        onProductClick = { id ->
+                            Toast.makeText(this, "Clique no ID: $id", Toast.LENGTH_SHORT).show()
                         }
                     )
                 }
